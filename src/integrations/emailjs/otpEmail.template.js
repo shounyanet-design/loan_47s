@@ -11,6 +11,9 @@ const buildOtpEmailPayload = (toEmail, userName, otpCode, agreementNumber) => {
     user_name: userName,
     otp_code: otpCode,
     to_email: toEmail,
+    email: toEmail, // Alias in case the template uses {{email}}
+    user_email: toEmail, // Alias in case the template uses {{user_email}}
+    recipient_email: toEmail, // Alias in case the template uses {{recipient_email}}
     agreement_number: agreementNumber,
   };
 };

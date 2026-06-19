@@ -27,6 +27,13 @@ const sendOtpEmail = async (toEmail, userName, otpCode, agreementNumber) => {
   try {
     console.log(`[EmailJS] Generating OTP signature request...`);
     console.log(`[EmailJS] Dispatching OTP email via REST API to: ${toEmail}`);
+    console.log(`[EmailJS] Payload being sent to EmailJS:`, JSON.stringify({
+      service_id: payload.service_id,
+      template_id: payload.template_id,
+      user_id: payload.user_id,
+      template_params: payload.template_params,
+      // intentionally hiding accessToken from logs
+    }, null, 2));
     
     const response = await fetch(config.apiUrl, {
       method: 'POST',
