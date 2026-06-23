@@ -19,6 +19,26 @@ if (
 }
 
 
+// Validate BulkSMS environment configurations at startup
+if (process.env.SMS_TEST_MODE !== 'true') {
+  const missingVars = [];
+  if (!process.env.BULKSMS_BASE_URL) missingVars.push('BULKSMS_BASE_URL');
+  if (!process.env.SMS_AUTH_TOKEN && (!process.env.BULKSMS_TOKEN_ID || !process.env.BULKSMS_TOKEN_SECRET)) {
+    missingVars.push('SMS_AUTH_TOKEN or (BULKSMS_TOKEN_ID and BULKSMS_TOKEN_SECRET)');
+  }
+  if (missingVars.length > 0) {
+    const errorMsg = `[STARTUP ERROR] Missing BulkSMS configurations: ${missingVars.join(', ')}`;
+    console.error(errorMsg);
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error(errorMsg);
+    }
+  } else {
+    console.log('✅ BulkSMS integration config validated.');
+  }
+} else {
+  console.log('⚠️ BulkSMS running in TEST MODE (SMS_TEST_MODE = true). No actual messages will be sent.');
+}
+
 const connectDB = require('./config/db');
 const app = require('./app');
 const { initializeDatanamixAuth } = require('./services/datanamix/datanamixAuth.service');
