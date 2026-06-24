@@ -1126,6 +1126,7 @@ const createApplicationOnBehalf = asyncHandler(async (req, res) => {
       residentialAddress: personal.residentialAddress,
       requestedAmount: amount,
       requestedDuration: duration,
+      repaymentDate: banking.repaymentDate ? new Date(banking.repaymentDate) : undefined,
       processingFee,
       interestRate,
       estimatedMonthlyEMI,

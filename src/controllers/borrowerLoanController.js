@@ -366,6 +366,7 @@ exports.submitFullApplication = asyncHandler(async (req, res, next) => {
       residentialAddress: personal.residentialAddress,
       requestedAmount: amount,
       requestedDuration: duration,
+      repaymentDate: banking.repaymentDate ? new Date(banking.repaymentDate) : undefined,
       processingFee,
       interestRate,
       estimatedMonthlyEMI,

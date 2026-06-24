@@ -28,6 +28,7 @@ const loanApplicationSchema = new mongoose.Schema(
     interestRate: { type: Number },
     estimatedMonthlyEMI: { type: Number },
     totalRepayment: { type: Number },
+    repaymentDate: { type: Date },
 
     // Status Tracking
     status: {

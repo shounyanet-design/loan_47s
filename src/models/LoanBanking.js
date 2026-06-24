@@ -29,6 +29,9 @@ const loanBankingSchema = new mongoose.Schema({
   requestedDuration: {
     type: Number, // in months
     required: true
+  },
+  repaymentDate: {
+    type: Date
   }
 }, { timestamps: true });
 
